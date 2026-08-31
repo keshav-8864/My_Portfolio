@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+:root {
+  --background: #081b29; /* Dark blue background */
+  --foreground: #ededed; /* Light text */
+  --card: #112a42;
+  --border: #1a3a5c;
+  --primary: #00eeee; /* Neon Cyan (#0ef) */
+  --primary-foreground: #081b29;
+}
+
+[data-theme='light'] {
+  --background: #f4f4ec; /* Light beige background */
+  --foreground: #1c3b2b; /* Dark green text */
+  --card: #e8e8dc;
+  --border: #d1d1c4;
+  --primary: #195b30; /* Dark green for buttons/highlights */
+  --primary-foreground: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  @apply antialiased min-h-screen selection:bg-[var(--primary)]/30 selection:text-[var(--primary)] overflow-x-hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
