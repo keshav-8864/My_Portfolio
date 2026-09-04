@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { personalInfo, socialLinks } from "@/data/portfolio";
 
 function useTypewriter(words: string[], typingSpeed = 100, deletingSpeed = 50, pauseTime = 1500) {
@@ -41,7 +42,7 @@ export function Hero() {
 
   return (
     <section 
-      className="relative w-full h-screen flex flex-col justify-center px-[10%] pt-[70px] bg-cover bg-center bg-no-repeat"
+      className="relative w-full min-h-screen flex flex-col justify-center pt-24 pb-12 md:pt-[70px] bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: "url('/Purple Illustrated Mountain Desktop Wallpaper.png'), linear-gradient(to right, var(--background), var(--background))" }}
     >
       <div className="container mx-auto px-6 max-w-7xl z-10 mt-10 lg:mt-0">
@@ -52,7 +53,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 100 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.7, ease: "easeOut" }}
-              className="text-[32px] font-bold text-[var(--foreground)] mb-0"
+              className="text-2xl md:text-[32px] font-bold text-[var(--foreground)] mb-2 md:mb-0"
             >
               Hello, It's Me
             </motion.h3>
@@ -61,7 +62,7 @@ export function Hero() {
               initial={{ opacity: 0, x: -100 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 1, ease: "easeOut" }}
-              className="text-[56px] font-bold text-[var(--foreground)] leading-tight -my-1"
+              className="text-4xl sm:text-5xl md:text-[56px] font-bold text-[var(--foreground)] leading-tight -my-1 mb-2 md:mb-0"
             >
               {personalInfo.name}
             </motion.h1>
@@ -70,7 +71,7 @@ export function Hero() {
               initial={{ opacity: 0, y: -100 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.7, ease: "easeOut" }}
-              className="text-[32px] font-bold text-[var(--foreground)] mb-[30px]"
+              className="text-xl sm:text-2xl md:text-[32px] font-bold text-[var(--foreground)] mb-6 md:mb-[30px]"
             >
               And I'm a <span className="text-[var(--primary)]">{typedText}</span><span className="animate-pulse text-[var(--primary)] font-normal">|</span>
             </motion.h3>
@@ -79,7 +80,7 @@ export function Hero() {
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 1, ease: "easeOut" }}
-              className="text-[20px] text-[var(--foreground)] leading-relaxed mb-6 max-w-lg"
+              className="text-base sm:text-lg md:text-[20px] text-[var(--foreground)] leading-relaxed mb-6 max-w-lg"
             >
               {personalInfo.shortDescription}
             </motion.p>
@@ -130,10 +131,13 @@ export function Hero() {
               <div className="absolute inset-0 bg-gradient-to-tr from-[var(--primary)]/20 to-transparent rounded-full animate-pulse mix-blend-overlay"></div>
               
               <div className="relative w-full h-full rounded-full overflow-hidden bg-[var(--background)]/50 flex flex-col items-center justify-center group">
-                <img
+                <Image
                   src="/keshav.jpg"
-                  alt="Keshav Dixit"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  alt="Keshav Dixit - Full Stack Developer"
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
             </div>

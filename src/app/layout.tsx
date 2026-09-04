@@ -13,14 +13,35 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Keshav Dixit | Full-Stack Developer",
-  description: "Portfolio of Keshav Dixit, a Full-Stack Developer specializing in scalable web applications and AI-powered experiences.",
+  title: "Keshav Dixit | Full-Stack Developer & Software Engineer",
+  description: "Portfolio of Keshav Dixit, a highly motivated Full-Stack Developer specializing in scalable web applications, React, Node.js, and AI-powered experiences.",
+  keywords: ["Keshav Dixit", "Full-Stack Developer", "Software Engineer", "React Developer", "Next.js", "Node.js", "Portfolio", "Web Developer", "India", "JSS Academy"],
+  authors: [{ name: "Keshav Dixit", url: "https://github.com/keshav-8864" }],
+  creator: "Keshav Dixit",
+  metadataBase: new URL("https://github.com/keshav-8864"), // Replace with actual domain when deployed
   openGraph: {
     title: "Keshav Dixit | Full-Stack Developer",
-    description: "Portfolio of Keshav Dixit, a Full-Stack Developer specializing in scalable web applications and AI-powered experiences.",
-    url: "https://keshavdixit.dev",
+    description: "Portfolio of Keshav Dixit, specializing in scalable web applications and AI-powered experiences.",
+    url: "https://github.com/keshav-8864", // Replace with actual deployed URL
     siteName: "Keshav Dixit Portfolio",
     type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Keshav Dixit | Full-Stack Developer",
+    description: "Portfolio of Keshav Dixit, specializing in scalable web applications and AI-powered experiences.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 };
 

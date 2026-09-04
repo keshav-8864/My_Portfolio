@@ -15,6 +15,10 @@ async function getLeetCodeStats(): Promise<LeetCodeStats | null> {
     const query = `
       query getUserProfile($username: String!) {
         matchedUser(username: $username) {
+          profile {
+            ranking
+            reputation
+          }
           submitStats {
             acSubmissionNum {
               difficulty
@@ -27,12 +31,11 @@ async function getLeetCodeStats(): Promise<LeetCodeStats | null> {
         }
         userContestRanking(username: $username) {
           rating
-          globalRanking
         }
       }
     `;
 
-    // Fetch directly from LeetCode GraphQL API, completely bypassing the third-party proxy and its rate limits
+    // Fetch directly from LeetCode GraphQL API
     const res = await fetch('https://leetcode.com/graphql', {
       method: 'POST',
       headers: {
@@ -43,7 +46,7 @@ async function getLeetCodeStats(): Promise<LeetCodeStats | null> {
         query: query,
         variables: { username }
       }),
-      next: { revalidate: 21600 }
+      next: { revalidate: 3600 } // Update every hour
     });
 
     if (!res.ok) throw new Error(`LeetCode GraphQL error: ${res.status}`);
@@ -62,7 +65,7 @@ async function getLeetCodeStats(): Promise<LeetCodeStats | null> {
 
     const contest = data.data?.userContestRanking || {};
     const rating = contest.rating ? Math.round(contest.rating) : null;
-    const ranking = contest.globalRanking || 0;
+    const ranking = matchedUser.profile?.ranking || 0;
 
     const calendarStr = matchedUser.userCalendar?.submissionCalendar || "{}";
     const calendar = JSON.parse(calendarStr);

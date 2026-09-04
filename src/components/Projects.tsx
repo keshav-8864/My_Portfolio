@@ -38,7 +38,7 @@ function ProjectCard({ project, index }: { project: typeof featuredProjects[0], 
         <div className="relative aspect-video bg-[var(--card)]/80 backdrop-blur-sm border border-[var(--border)] rounded-2xl overflow-hidden flex items-center justify-center">
           {/* Fallback for no image - creating a beautiful gradient/pattern instead */}
           <div className="absolute inset-0 bg-gradient-to-br from-[var(--background)] via-[var(--card)] to-[var(--primary)]/10 opacity-80"></div>
-          <h3 className="relative z-10 text-3xl font-extrabold text-[var(--foreground)]/20 uppercase tracking-widest text-center px-4">
+          <h3 className="relative z-10 text-2xl md:text-3xl font-extrabold text-[var(--foreground)]/20 uppercase tracking-widest text-center px-4">
             {project.title.split(' — ')[0]}
           </h3>
         </div>

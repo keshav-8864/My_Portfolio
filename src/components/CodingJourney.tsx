@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Target, Flame, Trophy, Code2 } from "lucide-react";
 
@@ -15,6 +15,15 @@ export interface LeetCodeStats {
 }
 
 export function CodingJourney({ stats }: { stats: LeetCodeStats | null }) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll the heatmap to the right (most recent days) on load
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollLeft = scrollRef.current.scrollWidth;
+    }
+  }, [stats]);
+
   // If we couldn't fetch stats (e.g. rate limited in production), completely hide this section
   if (!stats) return null;
 
@@ -129,7 +138,10 @@ export function CodingJourney({ stats }: { stats: LeetCodeStats | null }) {
             </div>
 
             {/* Heatmap Grid rendering */}
-            <div className="w-full overflow-x-auto pb-4">
+            <div 
+              ref={scrollRef} 
+              className="w-full overflow-x-auto pb-4 scroll-smooth"
+            >
               <div className="flex gap-1.5 min-w-max">
                 {heatmapGrid.map((col, colIndex) => (
                   <div key={colIndex} className="flex flex-col gap-1.5">
@@ -238,21 +250,21 @@ export function CodingJourney({ stats }: { stats: LeetCodeStats | null }) {
                 <Trophy size={22} className="text-[var(--primary)]" />
               </div>
               <div className="w-full">
-                <p className="text-sm text-[var(--foreground)]/60 mb-1">Contest Rating</p>
+                <p className="text-sm text-[var(--foreground)]/60 mb-1">Global Ranking</p>
                 <div className="flex items-baseline gap-3 mb-1">
                   <h4 className="text-xl font-bold text-[var(--foreground)] flex items-center">
-                    {stats ? (stats.rating || "Unrated") : <div className="h-6 w-20 bg-[var(--foreground)]/10 rounded animate-pulse" />}
+                    {stats ? (stats.ranking ? `#${stats.ranking.toLocaleString('en-US')}` : "Unranked") : <div className="h-6 w-20 bg-[var(--foreground)]/10 rounded animate-pulse" />}
                   </h4>
                 </div>
                 {stats ? (
-                  stats.ranking > 0 && (
+                  stats.rating && (
                     <p className="text-sm text-[var(--foreground)]/70 leading-snug">
-                      Global Rank: <span className="font-semibold text-[var(--foreground)]">{stats.ranking.toLocaleString('en-US')}</span>
+                      Contest Rating: <span className="font-semibold text-[var(--foreground)]">{stats.rating}</span>
                     </p>
                   )
                 ) : (
                   <div className="flex items-center gap-2 mt-2">
-                    <span className="text-sm text-[var(--foreground)]/70">Global Rank:</span>
+                    <span className="text-sm text-[var(--foreground)]/70">Contest Rating:</span>
                     <div className="h-4 w-16 bg-[var(--foreground)]/10 rounded animate-pulse" />
                   </div>
                 )}
