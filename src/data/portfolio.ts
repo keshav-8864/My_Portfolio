@@ -14,7 +14,14 @@ export const personalInfo = {
   }
 };
 
-export const socialLinks = [
+export interface SocialLink {
+  name: string;
+  url: string;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  label?: string;
+}
+
+export const socialLinks: SocialLink[] = [
   { name: "GitHub", url: "https://github.com/keshav-8864", icon: GithubIcon },
   { name: "LinkedIn", url: "https://www.linkedin.com/in/dixit-keshav8864", icon: LinkedinIcon },
   { name: "LeetCode", url: "https://leetcode.com/u/Keshav_31_12/", icon: LeetCodeIcon },

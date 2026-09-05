@@ -57,11 +57,15 @@ async function getLeetCodeStats(): Promise<LeetCodeStats | null> {
     const matchedUser = data.data?.matchedUser;
     if (!matchedUser) throw new Error("User not found");
 
-    const submissions = matchedUser.submitStats?.acSubmissionNum || [];
-    const easy = submissions.find((s: any) => s.difficulty === "Easy")?.count || 0;
-    const medium = submissions.find((s: any) => s.difficulty === "Medium")?.count || 0;
-    const hard = submissions.find((s: any) => s.difficulty === "Hard")?.count || 0;
-    const total = submissions.find((s: any) => s.difficulty === "All")?.count || (easy + medium + hard);
+    interface SubmissionItem {
+      difficulty: string;
+      count: number;
+    }
+    const submissions: SubmissionItem[] = matchedUser.submitStats?.acSubmissionNum || [];
+    const easy = submissions.find((s) => s.difficulty === "Easy")?.count || 0;
+    const medium = submissions.find((s) => s.difficulty === "Medium")?.count || 0;
+    const hard = submissions.find((s) => s.difficulty === "Hard")?.count || 0;
+    const total = submissions.find((s) => s.difficulty === "All")?.count || (easy + medium + hard);
 
     const contest = data.data?.userContestRanking || {};
     const rating = contest.rating ? Math.round(contest.rating) : null;
@@ -79,7 +83,7 @@ async function getLeetCodeStats(): Promise<LeetCodeStats | null> {
       rating: rating,
       calendar: calendar,
     };
-  } catch (error) {
+  } catch {
     console.warn("Could not fetch live LeetCode stats. (This is normal if rate limited).");
     
     // In development mode (next dev), Next.js fetches on every single page reload.

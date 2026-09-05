@@ -1,17 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Code2, Terminal, Box, Globe, Database } from "lucide-react";
+import { Code2, Box, Globe, Database } from "lucide-react";
 
 export function Skills() {
   return (
-    <section id="skills" className="py-20 md:py-32 bg-[var(--background)]">
-      <div className="container mx-auto px-6 max-w-6xl">
+    <section id="skills" className="py-16 md:py-32 bg-[var(--background)]">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
         <motion.h2 
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-[42px] md:text-[56px] font-extrabold text-center text-[var(--foreground)] mb-20"
+          className="text-4xl md:text-5xl font-extrabold text-center text-[var(--foreground)] mb-16 md:mb-20"
         >
           My <span className="text-[var(--primary)]">Skills</span>
         </motion.h2>
@@ -55,7 +55,7 @@ export function Skills() {
               </h3>
             </div>
             
-            <div className="grid grid-cols-2 gap-y-12 gap-x-4 mt-12">
+            <div className="grid grid-cols-1 min-[400px]:grid-cols-2 sm:grid-cols-2 gap-y-12 gap-x-4 mt-12">
               <ProfessionalSkillCircle name="Creativity" percentage={90} />
               <ProfessionalSkillCircle name="Communication" percentage={80} />
               <ProfessionalSkillCircle name="Problem Solving" percentage={90} />
@@ -69,7 +69,7 @@ export function Skills() {
   );
 }
 
-function TechnicalSkillBar({ name, percentage, icon: Icon }: { name: string, percentage: number, icon: any }) {
+function TechnicalSkillBar({ name, percentage, icon: Icon }: { name: string, percentage: number, icon: React.ComponentType<{ size?: number; className?: string }> }) {
   return (
     <div className="w-full">
       <div className="flex justify-between items-end mb-2">

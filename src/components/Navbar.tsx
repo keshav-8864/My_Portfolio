@@ -53,6 +53,17 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [activeSection]);
 
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
+
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   return (
@@ -64,15 +75,15 @@ export function Navbar() {
           : "bg-transparent py-6"
       )}
     >
-      <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between w-full">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl flex items-center justify-between w-full">
         <motion.a 
           href="#" 
-          className="text-3xl text-[var(--foreground)] font-extrabold tracking-tight cursor-pointer"
+          className="text-2xl sm:text-3xl text-[var(--foreground)] font-extrabold tracking-tight cursor-pointer"
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          Portfolio<span className="text-[var(--primary)]">.</span>
+          Keshav <span className="text-[var(--primary)]">.</span>
         </motion.a>
 
         {/* Desktop Navigation */}
@@ -123,14 +134,14 @@ export function Navbar() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="absolute top-0 left-0 right-0 h-screen bg-[var(--background)] flex flex-col items-center justify-center space-y-6 z-40 md:hidden"
+              className="fixed inset-0 h-[100dvh] w-screen bg-[var(--background)]/95 backdrop-blur-2xl flex flex-col items-center justify-center space-y-7 z-40 md:hidden p-6"
             >
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={closeMobileMenu}
-                  className="text-3xl font-medium text-[var(--foreground)] hover:text-[var(--primary)] transition-colors"
+                  className="text-2xl sm:text-3xl font-semibold text-[var(--foreground)] hover:text-[var(--primary)] transition-colors py-1"
                 >
                   {link.name}
                 </a>

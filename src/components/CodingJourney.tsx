@@ -2,7 +2,7 @@
 
 import { useMemo, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Target, Flame, Trophy, Code2 } from "lucide-react";
+import { ExternalLink, Target, Trophy, Code2 } from "lucide-react";
 
 export interface LeetCodeStats {
   solvedProblem: number;
@@ -23,9 +23,6 @@ export function CodingJourney({ stats }: { stats: LeetCodeStats | null }) {
       scrollRef.current.scrollLeft = scrollRef.current.scrollWidth;
     }
   }, [stats]);
-
-  // If we couldn't fetch stats (e.g. rate limited in production), completely hide this section
-  if (!stats) return null;
 
   // Generate heatmap grid based on actual data
   const heatmapGrid = useMemo(() => {
@@ -84,17 +81,20 @@ export function CodingJourney({ stats }: { stats: LeetCodeStats | null }) {
     }
   };
 
+  // If we couldn't fetch stats, hide this section
+  if (!stats) return null;
+
   return (
-    <section id="journey" className="py-20 md:py-32 relative bg-[var(--background)]">
-      <div className="container mx-auto px-6 max-w-6xl">
+    <section id="journey" className="py-16 md:py-32 relative bg-[var(--background)]">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
         
         {/* Header */}
-        <div className="mb-16">
+        <div className="mb-12 md:mb-16">
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--foreground)]/50 mb-4"
+            className="text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-[var(--foreground)]/50 mb-3 sm:mb-4"
           >
             CODING JOURNEY
           </motion.p>
@@ -103,7 +103,7 @@ export function CodingJourney({ stats }: { stats: LeetCodeStats | null }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl md:text-5xl font-bold text-[var(--foreground)] leading-tight max-w-3xl"
+            className="text-2xl sm:text-3xl md:text-5xl font-bold text-[var(--foreground)] leading-tight max-w-3xl"
           >
             Mastering Problem Solving — <span className="text-[var(--primary)] inline-flex items-center gap-2">
               {stats ? `${stats.solvedProblem}+` : <div className="h-8 md:h-12 w-24 bg-[var(--primary)]/20 rounded animate-pulse" />} algorithms
@@ -120,18 +120,18 @@ export function CodingJourney({ stats }: { stats: LeetCodeStats | null }) {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-7 bg-[var(--card)]/40 border border-[var(--border)] rounded-2xl p-6 md:p-8 flex flex-col justify-between"
+            className="lg:col-span-7 bg-[var(--card)]/40 border border-[var(--border)] rounded-2xl p-4 sm:p-6 md:p-8 flex flex-col justify-between"
           >
-            <div className="flex justify-between items-start mb-10">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-6 sm:mb-10">
               <div>
-                <p className="text-sm text-[var(--foreground)]/60 mb-1">Activity heatmap</p>
-                <h3 className="text-lg md:text-xl font-bold text-[var(--foreground)]">Daily problem-solving rhythm</h3>
+                <p className="text-xs sm:text-sm text-[var(--foreground)]/60 mb-1">Activity heatmap</p>
+                <h3 className="text-base sm:text-lg md:text-xl font-bold text-[var(--foreground)]">Daily problem-solving rhythm</h3>
               </div>
               <a 
                 href="https://leetcode.com/u/Keshav_31_12/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 text-sm text-[var(--foreground)]/80 hover:text-[var(--primary)] hover:border-[var(--primary)] border border-[var(--border)] rounded-lg transition-colors bg-[var(--background)]/50"
+                className="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm text-[var(--foreground)]/80 hover:text-[var(--primary)] hover:border-[var(--primary)] border border-[var(--border)] rounded-lg transition-colors bg-[var(--background)]/50 w-fit"
               >
                 Profile <ExternalLink size={14} />
               </a>
@@ -179,14 +179,14 @@ export function CodingJourney({ stats }: { stats: LeetCodeStats | null }) {
             className="lg:col-span-5 flex flex-col gap-4"
           >
             {/* Card 1: Total Solved & Difficulty */}
-            <div className="bg-[var(--card)]/40 border border-[var(--border)] rounded-2xl p-6 flex items-start gap-5 hover:border-[var(--primary)]/30 transition-colors group h-full">
-              <div className="bg-[var(--background)] border border-[var(--border)] p-3 rounded-xl group-hover:border-[var(--primary)]/50 transition-colors shadow-none group-hover:shadow-[0_0_15px_var(--primary)]/20">
-                <Target size={22} className="text-[var(--primary)]" />
+            <div className="bg-[var(--card)]/40 border border-[var(--border)] rounded-2xl p-4 sm:p-6 flex items-start gap-3.5 sm:gap-5 hover:border-[var(--primary)]/30 transition-colors group h-full">
+              <div className="bg-[var(--background)] border border-[var(--border)] p-2.5 sm:p-3 rounded-xl group-hover:border-[var(--primary)]/50 transition-colors shadow-none group-hover:shadow-[0_0_15px_var(--primary)]/20 shrink-0">
+                <Target size={20} className="text-[var(--primary)] sm:w-[22px] sm:h-[22px]" />
               </div>
               <div className="w-full">
-                <p className="text-sm text-[var(--foreground)]/60 mb-1">Problems Solved</p>
+                <p className="text-xs sm:text-sm text-[var(--foreground)]/60 mb-1">Problems Solved</p>
                 <div className="flex items-baseline gap-2 mb-3">
-                  <h4 className="text-xl font-bold text-[var(--foreground)] flex items-center">
+                  <h4 className="text-lg sm:text-xl font-bold text-[var(--foreground)] flex items-center">
                     {stats ? stats.solvedProblem : <div className="h-6 w-12 bg-[var(--foreground)]/10 rounded animate-pulse" />}
                   </h4>
                   <span className="text-xs text-[var(--foreground)]/50">Total</span>
@@ -195,7 +195,7 @@ export function CodingJourney({ stats }: { stats: LeetCodeStats | null }) {
                 <div className="flex flex-col gap-3 mt-1">
                   {/* Easy */}
                   <div>
-                    <div className="flex justify-between text-sm mb-1.5 items-center">
+                    <div className="flex justify-between text-xs sm:text-sm mb-1.5 items-center">
                       <span className="text-[#00b8a3] font-semibold">Easy</span>
                       <span className="text-[var(--foreground)] font-bold">
                         {stats ? stats.easySolved : <div className="h-4 w-6 bg-[var(--foreground)]/10 rounded animate-pulse" />}
@@ -211,7 +211,7 @@ export function CodingJourney({ stats }: { stats: LeetCodeStats | null }) {
                   
                   {/* Medium */}
                   <div>
-                    <div className="flex justify-between text-sm mb-1.5 items-center">
+                    <div className="flex justify-between text-xs sm:text-sm mb-1.5 items-center">
                       <span className="text-[#ffc01e] font-semibold">Medium</span>
                       <span className="text-[var(--foreground)] font-bold">
                         {stats ? stats.mediumSolved : <div className="h-4 w-6 bg-[var(--foreground)]/10 rounded animate-pulse" />}
@@ -227,7 +227,7 @@ export function CodingJourney({ stats }: { stats: LeetCodeStats | null }) {
                   
                   {/* Hard */}
                   <div>
-                    <div className="flex justify-between text-sm mb-1.5 items-center">
+                    <div className="flex justify-between text-xs sm:text-sm mb-1.5 items-center">
                       <span className="text-[#ef4743] font-semibold">Hard</span>
                       <span className="text-[var(--foreground)] font-bold">
                         {stats ? stats.hardSolved : <div className="h-4 w-6 bg-[var(--foreground)]/10 rounded animate-pulse" />}
@@ -245,26 +245,26 @@ export function CodingJourney({ stats }: { stats: LeetCodeStats | null }) {
             </div>
 
             {/* Card 2: Rating */}
-            <div className="bg-[var(--card)]/40 border border-[var(--border)] rounded-2xl p-6 flex items-start gap-5 hover:border-[var(--primary)]/30 transition-colors group">
-              <div className="bg-[var(--background)] border border-[var(--border)] p-3 rounded-xl group-hover:border-[var(--primary)]/50 transition-colors shadow-none group-hover:shadow-[0_0_15px_var(--primary)]/20">
-                <Trophy size={22} className="text-[var(--primary)]" />
+            <div className="bg-[var(--card)]/40 border border-[var(--border)] rounded-2xl p-4 sm:p-6 flex items-start gap-3.5 sm:gap-5 hover:border-[var(--primary)]/30 transition-colors group">
+              <div className="bg-[var(--background)] border border-[var(--border)] p-2.5 sm:p-3 rounded-xl group-hover:border-[var(--primary)]/50 transition-colors shadow-none group-hover:shadow-[0_0_15px_var(--primary)]/20 shrink-0">
+                <Trophy size={20} className="text-[var(--primary)] sm:w-[22px] sm:h-[22px]" />
               </div>
               <div className="w-full">
-                <p className="text-sm text-[var(--foreground)]/60 mb-1">Global Ranking</p>
+                <p className="text-xs sm:text-sm text-[var(--foreground)]/60 mb-1">Global Ranking</p>
                 <div className="flex items-baseline gap-3 mb-1">
-                  <h4 className="text-xl font-bold text-[var(--foreground)] flex items-center">
+                  <h4 className="text-lg sm:text-xl font-bold text-[var(--foreground)] flex items-center">
                     {stats ? (stats.ranking ? `#${stats.ranking.toLocaleString('en-US')}` : "Unranked") : <div className="h-6 w-20 bg-[var(--foreground)]/10 rounded animate-pulse" />}
                   </h4>
                 </div>
                 {stats ? (
                   stats.rating && (
-                    <p className="text-sm text-[var(--foreground)]/70 leading-snug">
+                    <p className="text-xs sm:text-sm text-[var(--foreground)]/70 leading-snug">
                       Contest Rating: <span className="font-semibold text-[var(--foreground)]">{stats.rating}</span>
                     </p>
                   )
                 ) : (
                   <div className="flex items-center gap-2 mt-2">
-                    <span className="text-sm text-[var(--foreground)]/70">Contest Rating:</span>
+                    <span className="text-xs sm:text-sm text-[var(--foreground)]/70">Contest Rating:</span>
                     <div className="h-4 w-16 bg-[var(--foreground)]/10 rounded animate-pulse" />
                   </div>
                 )}
@@ -272,14 +272,14 @@ export function CodingJourney({ stats }: { stats: LeetCodeStats | null }) {
             </div>
 
             {/* Card 3: Languages */}
-            <div className="bg-[var(--card)]/40 border border-[var(--border)] rounded-2xl p-6 flex items-start gap-5 hover:border-[var(--primary)]/30 transition-colors group">
-              <div className="bg-[var(--background)] border border-[var(--border)] p-3 rounded-xl group-hover:border-[var(--primary)]/50 transition-colors shadow-none group-hover:shadow-[0_0_15px_var(--primary)]/20">
-                <Code2 size={22} className="text-[var(--primary)]" />
+            <div className="bg-[var(--card)]/40 border border-[var(--border)] rounded-2xl p-4 sm:p-6 flex items-start gap-3.5 sm:gap-5 hover:border-[var(--primary)]/30 transition-colors group">
+              <div className="bg-[var(--background)] border border-[var(--border)] p-2.5 sm:p-3 rounded-xl group-hover:border-[var(--primary)]/50 transition-colors shadow-none group-hover:shadow-[0_0_15px_var(--primary)]/20 shrink-0">
+                <Code2 size={20} className="text-[var(--primary)] sm:w-[22px] sm:h-[22px]" />
               </div>
               <div>
-                <p className="text-sm text-[var(--foreground)]/60 mb-1">Languages</p>
-                <h4 className="text-xl font-bold text-[var(--foreground)] mb-1">C++ &bull; Java &bull; Python</h4>
-                <p className="text-sm text-[var(--foreground)]/70 leading-snug">Comfort across paradigms</p>
+                <p className="text-xs sm:text-sm text-[var(--foreground)]/60 mb-1">Languages</p>
+                <h4 className="text-lg sm:text-xl font-bold text-[var(--foreground)] mb-1">C++ &bull; Java &bull; Python</h4>
+                <p className="text-xs sm:text-sm text-[var(--foreground)]/70 leading-snug">Comfort across paradigms</p>
               </div>
             </div>
             

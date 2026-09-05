@@ -3,17 +3,17 @@ import { ArrowUp } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="py-12 border-t border-border/50 bg-card/30">
-      <div className="container mx-auto px-6 max-w-6xl">
+    <footer className="py-10 sm:py-12 border-t border-border/50 bg-card/30">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex flex-col items-center md:items-start">
-            <span className="text-2xl font-bold font-mono tracking-tighter mb-2">
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <span className="text-xl sm:text-2xl font-bold font-mono tracking-tighter mb-1 sm:mb-2">
               <span className="text-[var(--primary)]/70">&lt;</span>Keshav <span className="text-[var(--primary)]/70">/&gt;</span>
             </span>
-            <p className="text-[var(--foreground)]/60 text-sm">{personalInfo.role.split(' | ')[0]}</p>
+            <p className="text-[var(--foreground)]/60 text-xs sm:text-sm">{personalInfo.role.split(' | ')[0]}</p>
           </div>
           
-          <div className="flex items-center gap-4">
+          <div className="flex items-center justify-center flex-wrap gap-3 sm:gap-4">
             {socialLinks.map((link) => {
               const Icon = link.icon;
               return (

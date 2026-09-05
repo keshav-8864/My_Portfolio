@@ -16,7 +16,7 @@ export function SectionHeading({ children, className }: SectionHeadingProps) {
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
       className={cn(
-        "text-3xl md:text-4xl font-bold mb-8 text-center text-foreground tracking-tight",
+        "text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center text-foreground tracking-tight",
         className
       )}
     >

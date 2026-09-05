@@ -51,7 +51,7 @@ export function Contact() {
       } else {
         alert("Something went wrong. Please try again or email me directly.");
       }
-    } catch (error) {
+    } catch {
       alert("Something went wrong. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -59,29 +59,31 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 md:py-32 relative">
-      <div className="container mx-auto px-6 max-w-6xl">
-        <div className="max-w-2xl mx-auto text-center mb-16">
+    <section id="contact" className="py-16 md:py-32 relative">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
+        <div className="max-w-2xl mx-auto text-center mb-10 sm:mb-16">
           <SectionHeading className="mb-4">Let&apos;s Build Something Together</SectionHeading>
-          <p className="text-lg text-[var(--foreground)]/70">
+          <p className="text-sm sm:text-base md:text-lg text-[var(--foreground)]/70">
             I&apos;m always interested in discussing software engineering, full-stack development, AI applications, and interesting projects.
           </p>
         </div>
         
-        <div className="grid lg:grid-cols-5 gap-12 max-w-5xl mx-auto">
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-2 space-y-8"
+            className="lg:col-span-2 space-y-6 sm:space-y-8"
           >
-            <h3 className="text-2xl font-bold">Get in touch</h3>
-            <p className="text-[var(--foreground)]/70">
-              Feel free to reach out for collaborations, opportunities, or just to say hi!
-            </p>
+            <div>
+              <h3 className="text-xl sm:text-2xl font-bold mb-2">Get in touch</h3>
+              <p className="text-sm sm:text-base text-[var(--foreground)]/70">
+                Feel free to reach out for collaborations, opportunities, or just to say hi!
+              </p>
+            </div>
             
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {socialLinks.map((link) => {
                 const Icon = link.icon;
                 const isInternal = link.url.startsWith('#');
@@ -92,13 +94,12 @@ export function Contact() {
                     href={link.url}
                     target={isInternal ? undefined : "_blank"}
                     rel={isInternal ? undefined : "noopener noreferrer"}
-                    className="flex items-center gap-4 p-4 bg-card border border-border rounded-xl hover:border-[var(--primary)]/50 hover:bg-border/30 transition-colors group"
+                    className="flex items-center gap-3.5 sm:gap-4 p-3.5 sm:p-4 bg-card border border-border rounded-xl hover:border-[var(--primary)]/50 hover:bg-border/30 transition-colors group"
                   >
-                    <div className="p-3 bg-[var(--background)] rounded-lg group-hover:text-[var(--primary)] group-hover:bg-[var(--primary)]/10 transition-colors flex-shrink-0">
-                      <Icon size={20} />
+                    <div className="p-2.5 sm:p-3 bg-[var(--background)] rounded-lg group-hover:text-[var(--primary)] group-hover:bg-[var(--primary)]/10 transition-colors flex-shrink-0">
+                      <Icon size={18} className="sm:w-5 sm:h-5" />
                     </div>
-                    <span className="font-medium truncate">
-                      {/* @ts-ignore - label is optional and exists on Email */}
+                    <span className="text-sm sm:text-base font-medium truncate">
                       {link.label || link.name}
                     </span>
                   </a>
@@ -112,7 +113,7 @@ export function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="lg:col-span-3 bg-card border border-border p-8 rounded-2xl"
+            className="lg:col-span-3 bg-card border border-border p-5 sm:p-8 rounded-2xl"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
